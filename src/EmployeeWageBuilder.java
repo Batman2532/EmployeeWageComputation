@@ -5,7 +5,7 @@ public class EmployeeWageBuilder {
 		int present = 1, wage = 0, fullDayHr = 8, wagePerHr = 20, partTime = 2, partTimeHr = 4;
 		
 		double empCheck = Math.floor(Math.random() * 10 % 3);
-		
+	
 		int attendance=(int) empCheck;
 		
 		switch(attendance) {
