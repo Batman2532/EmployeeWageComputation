@@ -1,12 +1,21 @@
   
 public class EmployeeWageBuilder {
-
 	
-
-	public static void main(String[] args) {
-		int fullDayHr = 8, wagePerHr = 20, partTimeHr = 4,  workingDays=0,workingHours=0,totalWages=0, wage=0;
+	public String company;
+	public int workingHoursPerMonth;
+	public int workingDaysPerMonth;
+	
+	public EmployeeWageBuilder(String company,int workingHours,int workingDays) {
+		this.company = company;
+		this.workingHoursPerMonth = workingHours;
+		this.workingDaysPerMonth = workingDays;
 		
-		while(workingDays < 20 && workingHours < 100) {
+	}
+	public int CalculateWage() {
+
+		int fullDayHr = 8, wagePerHr = 20, partTimeHr = 4,totalWages=0, wage=0, workingDays =0,workingHours=0;
+		
+		while(workingDays < workingDaysPerMonth && workingHours < workingHoursPerMonth) {
 		
 		double empCheck = Math.floor(Math.random() * 10 % 3);
 	
@@ -15,34 +24,33 @@ public class EmployeeWageBuilder {
 		switch(attendance) {
 		
 		case 0:
-			System.out.println("Employee is absent");
 			break;
-		
 		 case 1: 
-			 System.out.println("Employee is present");
-			 wage=calculateDailyWage(wagePerHr, fullDayHr); 
+			 wage=wagePerHr * fullDayHr; 
 			 
 			workingDays=workingDays++;
 			workingHours=workingHours+8;
 			 break;  
 		 case 2:
-			 System.out.println("Employee is present Half Day");
-			 wage=calculateDailyWage(wagePerHr, partTimeHr);
+			 wage=wagePerHr*partTimeHr;
 			 
 				workingDays=workingDays++;
 				workingHours=workingHours+4;
 				break;
 		}
 		totalWages=totalWages + wage;
-		System.out.println("total salary for month: "+ totalWages);
 		}
 		
-		 
-
+		return totalWages;
+		
 	}
-     	public static int calculateDailyWage(int a, int b) {
-	    	int totalWage = a*b;
-		    return totalWage;
-}
+
+	
+	public static void main(String[] args) {
+		
+		EmployeeWageBuilder tata = new EmployeeWageBuilder("tata", 100, 20);
+		int totalW = tata.CalculateWage();
+		System.out.println("total salary for month in company "+tata.company+" "+totalW);
+ }
 
 }
