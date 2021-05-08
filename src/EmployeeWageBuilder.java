@@ -49,8 +49,10 @@ public class EmployeeWageBuilder {
 	public static void main(String[] args) {
 		
 		EmployeeWageBuilder tata = new EmployeeWageBuilder("tata", 100, 20);
-		int totalW = tata.CalculateWage();
-		System.out.println("total salary for month in company "+tata.company+" "+totalW);
- }
+		EmployeeWageBuilder reliance = new EmployeeWageBuilder("Reliance", 10, 20);
+		tata.CalculateWage();
+		reliance.CalculateWage();
+		
+	}
 
 }
