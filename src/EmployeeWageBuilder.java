@@ -1,58 +1,54 @@
   
 public class EmployeeWageBuilder {
 	
-	public String company;
-	public int workingHoursPerMonth;
-	public int workingDaysPerMonth;
-	
-	public EmployeeWageBuilder(String company,int workingHours,int workingDays) {
-		this.company = company;
-		this.workingHoursPerMonth = workingHours;
-		this.workingDaysPerMonth = workingDays;
-		
-	}
-	public int CalculateWage() {
+	private int numOfCompany = 0;
+    private CompanyWage[] companyEmpWageArray = new CompanyWage[5];
 
-		int fullDayHr = 8, wagePerHr = 20, partTimeHr = 4,totalWages=0, wage=0, workingDays =0,workingHours=0;
+
+    private  void addCompanyEmpWage(String company, int empRatePerHr, int noOfWorkingDays, int maxHrsPeronth) {
+        companyEmpWageArray[numOfCompany] = new CompanyWage(company, empRatePerHr, noOfWorkingDays, maxHrsPeronth);
+        numOfCompany++;
+    }
+
+  
+	private void calculateWage() {
+        for (int i = 0; i < numOfCompany; i++) {
+            companyEmpWageArray[i].setTotalEmpWage(this.calculateWage(companyEmpWageArray[i]));
+            System.out.println(companyEmpWageArray[i]);
+        }
+    }
 		
-		while(workingDays < workingDaysPerMonth && workingHours < workingHoursPerMonth) {
-		
-		double empCheck = Math.floor(Math.random() * 10 % 3);
-	
+
+	public int calculateWage(CompanyWage companyWage) {
+
+		int empHr = 0, workingDays =0,totalHr=0;	
+		while(workingDays < companyWage.noOfWorkingDays && totalHr < companyWage.maxHrsPeronth) {
+			workingDays++;
+		double empCheck = Math.floor(Math.random() * 10 % 3);	
 		int attendance=(int) empCheck;
-		
 		switch(attendance) {
 		
-		case 0:
+			case 0:
 			break;
 		 case 1: 
-			 wage=wagePerHr * fullDayHr; 
-			 
-			workingDays=workingDays++;
-			workingHours=workingHours+8;
+			 empHr = 8;  
 			 break;  
 		 case 2:
-			 wage=wagePerHr*partTimeHr;
-			 
-				workingDays=workingDays++;
-				workingHours=workingHours+4;
+			 empHr = 4;				
 				break;
 		}
-		totalWages=totalWages + wage;
+		totalHr = totalHr + empHr;
 		}
-		
-		return totalWages;
+		return totalHr * companyWage.empRatePerHr;	
 		
 	}
 
 	
 	public static void main(String[] args) {
-		
-		EmployeeWageBuilder tata = new EmployeeWageBuilder("tata", 100, 20);
-		EmployeeWageBuilder reliance = new EmployeeWageBuilder("Reliance", 10, 20);
-		tata.CalculateWage();
-		reliance.CalculateWage();
-		
+		EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();		
+		empWageBuilder.addCompanyEmpWage("tata", 100, 20, 120);
+		empWageBuilder.addCompanyEmpWage("Reliance", 100, 21,100);
+		empWageBuilder.calculateWage();		
 	}
 
 }
