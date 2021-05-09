@@ -1,19 +1,20 @@
-    class EmployeeWageBuilder implements WageCalculationInterface {
+import java.util.ArrayList;
+
+class EmployeeWageBuilder implements WageCalculationInterface {
 	
-	private int numOfCompany = 0;
-    public CompanyWage[] companyEmpWageArray = new CompanyWage[5];
+    public ArrayList<CompanyWage> companyWageList = new ArrayList<>();
 
 
     public  void addCompanyEmpWage(String company, int empRatePerHr, int noOfWorkingDays, int maxHrsPeronth) {
-        companyEmpWageArray[numOfCompany] = new CompanyWage(company, empRatePerHr, noOfWorkingDays, maxHrsPeronth);
-        numOfCompany++;
-    }
+        CompanyWage  companyWage = new CompanyWage(company, empRatePerHr, noOfWorkingDays, maxHrsPeronth);
+        companyWageList.add(companyWage);    }
 
   
 	public void calculateWage() {
-        for (int i = 0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setTotalEmpWage(this.calculateWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+        for (int i = 0; i < companyWageList.size(); i++) {
+        	 CompanyWage  companyWage = companyWageList.get(i);
+            companyWage.setTotalEmpWage(this.calculateWage(companyWage));
+            System.out.println(companyWage);
         }
     }
 		
