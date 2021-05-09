@@ -1,17 +1,16 @@
-  
-public class EmployeeWageBuilder {
+    class EmployeeWageBuilder implements WageCalculationInterface {
 	
 	private int numOfCompany = 0;
-    private CompanyWage[] companyEmpWageArray = new CompanyWage[5];
+    public CompanyWage[] companyEmpWageArray = new CompanyWage[5];
 
 
-    private  void addCompanyEmpWage(String company, int empRatePerHr, int noOfWorkingDays, int maxHrsPeronth) {
+    public  void addCompanyEmpWage(String company, int empRatePerHr, int noOfWorkingDays, int maxHrsPeronth) {
         companyEmpWageArray[numOfCompany] = new CompanyWage(company, empRatePerHr, noOfWorkingDays, maxHrsPeronth);
         numOfCompany++;
     }
 
   
-	private void calculateWage() {
+	public void calculateWage() {
         for (int i = 0; i < numOfCompany; i++) {
             companyEmpWageArray[i].setTotalEmpWage(this.calculateWage(companyEmpWageArray[i]));
             System.out.println(companyEmpWageArray[i]);
@@ -44,11 +43,4 @@ public class EmployeeWageBuilder {
 	}
 
 	
-	public static void main(String[] args) {
-		EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();		
-		empWageBuilder.addCompanyEmpWage("tata", 100, 20, 120);
-		empWageBuilder.addCompanyEmpWage("Reliance", 100, 21,100);
-		empWageBuilder.calculateWage();		
-	}
-
 }
